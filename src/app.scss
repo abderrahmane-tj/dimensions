@@ -1,0 +1,93 @@
+$faceSize: 100px;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+.scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: $faceSize;
+  transform: translate(-50%, -50%) rotateY(10deg) rotateX(10deg);
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+
+.cube-face {
+  transform-style: preserve-3d;
+  position: relative;
+  &+.cube-face {
+    transform: translateY($faceSize * -3) translateZ($faceSize);
+    &+.cube-face {
+      transform: translateY($faceSize * -6) translateZ($faceSize * 2);
+    }
+  }
+}
+
+.cube {
+  position: relative;
+  height: $faceSize;
+  width: $faceSize;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  transition: transform 1s;
+  .cube {
+    transform: translateY($faceSize);
+  }
+  &+.cube {
+    transform: translateX($faceSize) translateY($faceSize * -1);
+    &+.cube {
+      transform: translateX(2*$faceSize) translateY($faceSize * -2);;
+    }
+  }
+}
+
+.cube-inner {
+  position: relative;
+}
+
+.face {
+  position: absolute;
+  opacity: .2;
+  height: $faceSize;
+  width: $faceSize;
+  background: black;
+}
+
+.front {
+  transform: rotateY(0deg) translateZ(#{$faceSize / 2});
+  background: black;
+}
+
+.back {
+  transform: rotateX(180deg) translateZ(#{$faceSize / 2});
+  background: yellow;
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(#{$faceSize / 2});
+  background: darkgoldenrod;
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(#{$faceSize / 2});
+  background: darkkhaki;
+}
+
+.top {
+  transform: rotateX(90deg) translateZ(#{$faceSize / 2});
+  background: sandybrown;
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateZ(#{$faceSize / 2});
+  background: khaki;
+}
